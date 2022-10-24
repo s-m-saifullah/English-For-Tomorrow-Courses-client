@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SingleCourse = ({ course }) => {
-  const { name, img_url, description } = course;
+  const { id, name, img_url, description } = course;
   return (
-    <div className="card lg:card-side bg-base-100 shadow-xl mb-5">
+    <div className="card w-full lg:card-side bg-base-100 shadow-xl mb-5">
       <figure className="lg:w-1/4">
         <img src={img_url} alt="Album" />
       </figure>
@@ -12,7 +13,9 @@ const SingleCourse = ({ course }) => {
         <p className="hidden lg:block">{description}</p>
         <p className="lg:hidden">{description.slice(0, 100) + "..."}</p>
         <div className="card-actions justify-end">
-          <button className="btn btn-primary">Listen</button>
+          <Link to={`/course/${id}`} className="btn btn-primary">
+            Details
+          </Link>
         </div>
       </div>
     </div>

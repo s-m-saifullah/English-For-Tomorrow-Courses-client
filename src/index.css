@@ -6,3 +6,9 @@
 body {
   font-family: "Montserrat", sans-serif;
 }
+
+/* *,
+*::after,
+*::before {
+  border: 2px solid red;
+} */

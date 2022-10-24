@@ -3,9 +3,34 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="md:w-10/12 mx-auto bg-base-100">
-      <div className="navbar">
+    <div className="bg-base-100 py-4 mb-8 shadow-lg w-full">
+      <div className="navbar md:w-10/12 mx-auto">
         <div className="navbar-start">
+          <Link to="/" className="w-52">
+            <img src="./logo-light.png" alt="" />
+          </Link>
+        </div>
+        <div className="navbar-end ">
+          <ul className="menu menu-horizontal p-0 hidden lg:flex">
+            <li>
+              <Link to="/courses">Courses</Link>
+            </li>
+            <li>
+              <Link to="/faq">FAQ</Link>
+            </li>
+            <li>
+              <Link to="/blog">Blog</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+          </ul>
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
               <svg
@@ -25,40 +50,28 @@ const Header = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-compact dropdown-content mt-3 right-0 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
                 <Link to="/courses">Courses</Link>
               </li>
-              <li tabIndex={0}>
-                <Link to="" className="justify-between">
-                  Parent
-                </Link>
+              <li>
+                <Link to="/faq">FAQ</Link>
               </li>
               <li>
-                <Link to="">Item 3</Link>
+                <Link to="/blog">Blog</Link>
+              </li>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/register">Register</Link>
+              </li>
+              <li>
+                <Link to="/profile">Profile</Link>
               </li>
             </ul>
           </div>
-          <Link to="/" className="w-36">
-            <img src="./logo-light.png" alt="" />
-          </Link>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal p-0">
-            <li>
-              <Link to="/courses">Courses</Link>
-            </li>
-            <li tabIndex={0}>
-              <Link to="">Parent</Link>
-            </li>
-            <li>
-              <Link to="">Item 3</Link>
-            </li>
-          </ul>
-        </div>
-        <div className="navbar-end">
-          <a className="btn">Get started</a>
         </div>
       </div>
     </div>

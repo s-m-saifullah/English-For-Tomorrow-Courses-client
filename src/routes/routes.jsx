@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Checkout from "../components/pages/Checkout/Checkout";
 import Courses from "../components/pages/Course/Courses";
 import CourseDetails from "../components/pages/CourseDetails/CourseDetails";
 import ErrorPage from "../components/pages/ErrorPage";
@@ -41,6 +42,14 @@ export const routes = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/checkout/:id",
+        element: <Checkout />,
+        loader: ({ params }) =>
+          fetch(
+            `https://englishfortomorrow-server.vercel.app/courses/${params.id}`
+          ),
       },
       {
         path: "/*",

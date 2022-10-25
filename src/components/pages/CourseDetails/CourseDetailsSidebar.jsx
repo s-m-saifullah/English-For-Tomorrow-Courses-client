@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import { FaShareAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { CourseContext } from "./CourseDetails";
 
 const CourseDetailsSidebar = () => {
@@ -20,9 +22,9 @@ const CourseDetailsSidebar = () => {
           className="w-full aspect-video rounded-md"
           src={video_url}
           title="YouTube video player"
-          frameborder="0"
+          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          allowFullScreen
         ></iframe>
         <div className="p-7">
           <p className="font-bold text-3xl">BDT. {price}</p>
@@ -35,9 +37,12 @@ const CourseDetailsSidebar = () => {
           <p className="border-b border-dashed border-warning py-4">
             <span className="font-bold">Duration:</span> {duration}
           </p>
-          <p className="border-b border-dashed border-warning py-4">
+          <p className="py-4">
             <span className="font-bold">Quizzes:</span> {quizzes}
           </p>
+          <button className="text-primary text-lg w-full">
+            <FaShareAlt className="inline" /> Share this course
+          </button>
         </div>
       </div>
 
@@ -45,7 +50,7 @@ const CourseDetailsSidebar = () => {
         <h3 className="font-bold text-xl mb-4">Materials Included</h3>
         <ul className="list-disc">
           {materials_included.map((material, index) => (
-            <li key={index} className="ml-4">
+            <li key={index} className="ml-4 mb-2">
               {material}
             </li>
           ))}

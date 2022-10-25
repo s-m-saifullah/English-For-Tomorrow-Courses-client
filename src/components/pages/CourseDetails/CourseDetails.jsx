@@ -1,8 +1,18 @@
-import React from "react";
+import React, { createRef } from "react";
 import { useLoaderData } from "react-router-dom";
+import CourseDetailsSidebar from "./CourseDetailsSidebar";
+import ReactToPdf from "react-to-pdf";
+import { FaDownload } from "react-icons/fa";
+import CoverPhoto from "./CoverPhoto";
 
 const CourseDetails = () => {
   const courseDetails = useLoaderData();
+  const ref = createRef();
+  const options = {
+    orientation: "landscape",
+    unit: "in",
+    format: [15, 19],
+  };
   const {
     id,
     name,
@@ -18,37 +28,44 @@ const CourseDetails = () => {
   return (
     <div>
       {/* Cover Image */}
-      <div
-        className="hero min-h-[300px]"
-        style={{ backgroundImage: `url(${backgroundImg})` }}
+      <CoverPhoto backgroundImg={backgroundImg} name={name} />
+      <ReactToPdf
+        targetRef={ref}
+        options={options}
+        scale={1}
+        x={0.5}
+        y={0.5}
+        filename={`${name} details.pdf`}
       >
-        <div className="hero-overlay bg-opacity-20"></div>
-        <div className="hero-content text-center text-neutral-content">
-          <div className="max-w-md">
-            <h1 className="mb-5 text-2xl md:text:3xl lg:text-5xl font-bold">
-              {name}
-            </h1>
-          </div>
-        </div>
-      </div>
+        {({ toPdf }) => (
+          <button
+            onClick={toPdf}
+            className="btn btn-success text-center w-full"
+          >
+            <FaDownload className="mr-2" /> Download Course Details
+          </button>
+        )}
+      </ReactToPdf>
+
       {/* Course Details */}
-      <div className="w-11/12 md:w-10/12 mx-auto md:flex md:gap-6 my-20">
-        <div className="md:w-3/4 p-10">
+      <div
+        ref={ref}
+        className="w-11/12 md:w-10/12 mx-auto md:flex md:gap-6 my-20"
+      >
+        <div className="md:w-3/4 p-5 md:p-7 lg:p-10">
           <img className="w-full" src={img_wide_url} alt="" />
           <div className="badge badge-primary px-4 py-4 my-5">{level}</div>
-          <h3 className="my-7 text-3xl font-semibold">About The Course</h3>
-          <p>{description}</p>
-          <h3 className="my-7 text-3xl font-semibold">What You Will Learn</h3>
+          <h3 className="mt-7 mb-4 text-3xl font-semibold">About The Course</h3>
+          <p className="mb-7">{description}</p>
+          <h3 className="mb-4 text-3xl font-semibold">What You Will Learn</h3>
           <ul className="list-disc ml-4">
-            {topic_covered.map((topic) => (
-              <li>{topic}</li>
+            {topic_covered.map((topic, index) => (
+              <li key={index}>{topic}</li>
             ))}
           </ul>
         </div>
 
-        <div className="md:w-1/4">
-          <h3>sidebar</h3>
-        </div>
+        <CourseDetailsSidebar img_url={img_url} />
       </div>
     </div>
   );

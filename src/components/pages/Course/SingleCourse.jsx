@@ -9,8 +9,8 @@ const SingleCourse = ({ course }) => {
         <img src={img_url} alt="Album" />
       </figure>
       <div className="card-body lg:w-3/4">
-        <h2 className="card-title">{name}</h2>
-        <p className="hidden lg:block">{description}</p>
+        <h2 className="card-title text-3xl">{name}</h2>
+        <p className="hidden lg:block">{description.slice(0, 300) + "..."}</p>
         <p className="lg:hidden">{description.slice(0, 100) + "..."}</p>
         <div className="card-actions justify-end">
           <Link to={`/course/${id}`} className="btn btn-primary">

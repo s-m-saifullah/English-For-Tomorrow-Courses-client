@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import { FaMoon, FaSun } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo-light.png";
 
 const Header = () => {
+  const [isDark, setIsDark] = useState(false);
+
   return (
     <div className="bg-base-100 py-4 mb-8 shadow-lg w-full">
       <div className="navbar md:w-10/12 mx-auto">
         <div className="navbar-start">
           <Link to="/" className="w-52">
-            <img src="./logo-light.png" alt="" />
+            <img src={logo} alt="" />
           </Link>
         </div>
         <div className="navbar-end ">
@@ -29,6 +33,18 @@ const Header = () => {
             </li>
             <li>
               <Link to="/profile">Profile</Link>
+            </li>
+            <li onClick={() => setIsDark(!isDark)}>
+              {isDark ? (
+                <span>
+                  <FaSun />
+                </span>
+              ) : (
+                <span>
+                  {" "}
+                  <FaMoon />{" "}
+                </span>
+              )}
             </li>
           </ul>
           <div className="dropdown">

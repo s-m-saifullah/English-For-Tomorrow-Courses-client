@@ -8,6 +8,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 const Header = () => {
   const [isDark, setIsDark] = useState(false);
   const { user, setUser, logout } = useContext(AuthContext);
+  console.log(user);
 
   const handleLogout = () => {
     logout()
@@ -40,11 +41,20 @@ const Header = () => {
             {user?.displayName ? (
               <>
                 <li>
-                  <Link to="/profile">{user.displayName}</Link>
+                  <Link to="/profile">
+                    <img
+                      className="w-10 h-10 rounded-full "
+                      src={user.photoURL}
+                      alt=""
+                    />
+                  </Link>
                 </li>
-                <button onClick={handleLogout} className="btn btn-primary">
-                  Logout
-                </button>
+                <li>
+                  {" "}
+                  <button onClick={handleLogout} className="btn btn-primary ">
+                    Logout
+                  </button>
+                </li>
               </>
             ) : (
               <>

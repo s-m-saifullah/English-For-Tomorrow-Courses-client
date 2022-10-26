@@ -2,9 +2,13 @@ import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GithubAuthProvider,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
+  TwitterAuthProvider,
   updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
@@ -21,10 +25,22 @@ const AuthProvider = ({ children }) => {
   };
 
   // 2. Create User With Google
+  const googleProvider = new GoogleAuthProvider();
+  const googleSignIn = () => {
+    return signInWithPopup(auth, googleProvider);
+  };
 
   // 3. Create User With Twitter
+  const twitterProvider = new TwitterAuthProvider();
+  const twitterSignIn = () => {
+    return signInWithPopup(auth, twitterProvider);
+  };
 
   // 4. Create User With Github
+  const githubProvider = new GithubAuthProvider();
+  const githubSignIn = () => {
+    return signInWithPopup(auth, githubProvider);
+  };
 
   // 5. Update profile
   const profileUpdate = (name, photo) => {
@@ -63,6 +79,9 @@ const AuthProvider = ({ children }) => {
     profileUpdate,
     login,
     logout,
+    googleSignIn,
+    twitterSignIn,
+    githubSignIn,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

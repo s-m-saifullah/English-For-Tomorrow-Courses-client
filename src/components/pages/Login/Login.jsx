@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-import { FaFacebookF, FaTwitter, FaGithub } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaFacebookF, FaTwitter, FaGithub, FaGoogle } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../../assets/login.jpg";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Login = () => {
-  const { login, setUser } = useContext(AuthContext);
+  const { login, setUser, googleSignIn, twitterSignIn, githubSignIn } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -16,7 +18,33 @@ const Login = () => {
     login(email, password).then((result) => {
       const newUser = result.user;
       setUser(newUser);
+      navigate("/");
     });
+  };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const newUser = result.user;
+        setUser(newUser);
+      })
+      .catch((error) => console.log(error));
+  };
+  const handleTwitterSignIn = () => {
+    twitterSignIn()
+      .then((result) => {
+        const newUser = result.user;
+        setUser(newUser);
+      })
+      .catch((error) => console.log(error));
+  };
+  const handleGithubSignIn = () => {
+    githubSignIn()
+      .then((result) => {
+        const newUser = result.user;
+        setUser(newUser);
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -31,15 +59,17 @@ const Login = () => {
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="text-lg mb-0 mr-4">Sign in with</p>
                 <button
+                  onClick={handleGoogleSignIn}
                   type="button"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
                   className="inline-block p-3 bg-blue-600 text-white font-medium text-2xl leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
                 >
-                  <FaFacebookF />
+                  <FaGoogle />
                 </button>
 
                 <button
+                  onClick={handleTwitterSignIn}
                   type="button"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
@@ -49,6 +79,7 @@ const Login = () => {
                 </button>
 
                 <button
+                  onClick={handleGithubSignIn}
                   type="button"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"

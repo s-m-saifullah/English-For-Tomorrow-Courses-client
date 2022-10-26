@@ -1,13 +1,19 @@
 import React from "react";
 import { useContext } from "react";
-import { FaFacebookF, FaGithub, FaTwitter } from "react-icons/fa";
+import { FaFacebookF, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import registerImg from "../../../assets/register.jpg";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Register = () => {
-  const { setUser, createUserWithEmail, profileUpdate } =
-    useContext(AuthContext);
+  const {
+    setUser,
+    createUserWithEmail,
+    profileUpdate,
+    googleSignIn,
+    twitterSignIn,
+    githubSignIn,
+  } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,6 +37,31 @@ const Register = () => {
       })
       .catch((error) => console.log(error));
   };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const newUser = result.user;
+        setUser(newUser);
+      })
+      .catch((error) => console.log(error));
+  };
+  const handleTwitterSignIn = () => {
+    twitterSignIn()
+      .then((result) => {
+        const newUser = result.user;
+        setUser(newUser);
+      })
+      .catch((error) => console.log(error));
+  };
+  const handleGithubSignIn = () => {
+    githubSignIn()
+      .then((result) => {
+        const newUser = result.user;
+        setUser(newUser);
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <section className="min-h-[90vh] lg:w-10/12 mx-auto">
       <div className="px-6 h-full text-gray-800">
@@ -40,15 +71,17 @@ const Register = () => {
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="text-lg mb-0 mr-4">Register in with</p>
                 <button
+                  onClick={handleGoogleSignIn}
                   type="button"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
                   className="inline-block p-3 bg-blue-600 text-white font-medium text-2xl leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
                 >
-                  <FaFacebookF />
+                  <FaGoogle />
                 </button>
 
                 <button
+                  onClick={handleTwitterSignIn}
                   type="button"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
@@ -58,6 +91,7 @@ const Register = () => {
                 </button>
 
                 <button
+                  onClick={handleGithubSignIn}
                   type="button"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"

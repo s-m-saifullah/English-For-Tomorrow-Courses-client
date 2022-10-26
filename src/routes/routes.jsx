@@ -7,6 +7,7 @@ import Home from "../components/pages/Home/Home";
 import Login from "../components/pages/Login/Login";
 import Register from "../components/pages/Register/Register";
 import Main from "../layout/Main";
+import PrivateRoute from "./PrivateRoute";
 
 export const routes = createBrowserRouter([
   {
@@ -45,7 +46,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/checkout/:id",
-        element: <Checkout />,
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(
             `https://englishfortomorrow-server.vercel.app/courses/${params.id}`

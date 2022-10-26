@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { FaFacebookF, FaTwitter, FaGithub, FaGoogle } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginImg from "../../../assets/login.jpg";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
@@ -8,6 +8,8 @@ const Login = () => {
   const { login, setUser, googleSignIn, twitterSignIn, githubSignIn } =
     useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,7 +20,7 @@ const Login = () => {
     login(email, password).then((result) => {
       const newUser = result.user;
       setUser(newUser);
-      navigate("/");
+      navigate(from, { replace: true });
     });
   };
 
@@ -27,6 +29,7 @@ const Login = () => {
       .then((result) => {
         const newUser = result.user;
         setUser(newUser);
+        navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));
   };
@@ -35,6 +38,7 @@ const Login = () => {
       .then((result) => {
         const newUser = result.user;
         setUser(newUser);
+        navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));
   };
@@ -43,6 +47,7 @@ const Login = () => {
       .then((result) => {
         const newUser = result.user;
         setUser(newUser);
+        navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));
   };

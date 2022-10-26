@@ -18,32 +18,38 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // 1. Create User With Email
   const createUserWithEmail = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // 2. Create User With Google
   const googleProvider = new GoogleAuthProvider();
   const googleSignIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   // 3. Create User With Twitter
   const twitterProvider = new TwitterAuthProvider();
   const twitterSignIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, twitterProvider);
   };
 
   // 4. Create User With Github
   const githubProvider = new GithubAuthProvider();
   const githubSignIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, githubProvider);
   };
 
   // 5. Update profile
   const profileUpdate = (name, photo) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
@@ -52,6 +58,7 @@ const AuthProvider = ({ children }) => {
 
   // 6. Sign in
   const login = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -64,6 +71,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
+        setLoading(false);
       }
     });
 
@@ -82,6 +90,7 @@ const AuthProvider = ({ children }) => {
     googleSignIn,
     twitterSignIn,
     githubSignIn,
+    loading,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

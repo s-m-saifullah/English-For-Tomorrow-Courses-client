@@ -19,7 +19,7 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-base-100 py-4 mb-8 shadow-lg w-full">
+    <div className="bg-base-100 py-4 shadow-lg w-full">
       <div className="navbar md:w-10/12 mx-auto">
         <div className="navbar-start">
           <Link to="/" className="w-52">

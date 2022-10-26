@@ -1,10 +1,21 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo-light.png";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Header = () => {
   const [isDark, setIsDark] = useState(false);
+  const { user, setUser, logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        setUser(null);
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="bg-base-100 py-4 mb-8 shadow-lg w-full">
@@ -25,15 +36,26 @@ const Header = () => {
             <li>
               <Link to="/blog">Blog</Link>
             </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
+
+            {user?.displayName ? (
+              <>
+                <li>
+                  <Link to="/profile">{user.displayName}</Link>
+                </li>
+                <button onClick={handleLogout} className="btn btn-primary">
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link to="/register">Register</Link>
+                </li>
+              </>
+            )}
             <li onClick={() => setIsDark(!isDark)}>
               {isDark ? (
                 <span>

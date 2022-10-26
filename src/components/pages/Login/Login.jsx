@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaFacebookF, FaTwitter, FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import loginImg from "../../../assets/login.jpg";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Login = () => {
+  const { login, setUser } = useContext(AuthContext);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    login(email, password).then((result) => {
+      const newUser = result.user;
+      setUser(newUser);
+    });
+  };
+
   return (
     <section className="min-h-[90vh] lg:w-10/12 mx-auto">
       <div className="px-6 h-full text-gray-800">
@@ -12,7 +27,7 @@ const Login = () => {
             <img src={loginImg} className="w-full" alt="Sample image" />
           </div>
           <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <form>
+            <form onSubmit={handleLogin}>
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="text-lg mb-0 mr-4">Sign in with</p>
                 <button
@@ -51,6 +66,7 @@ const Login = () => {
               <div className="mb-6">
                 <input
                   type="email"
+                  name="email"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Email address"
                 />
@@ -60,6 +76,7 @@ const Login = () => {
               <div className="mb-6">
                 <input
                   type="password"
+                  name="password"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Password"
                 />

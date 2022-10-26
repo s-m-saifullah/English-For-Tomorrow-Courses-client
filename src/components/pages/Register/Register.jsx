@@ -1,15 +1,42 @@
 import React from "react";
+import { useContext } from "react";
 import { FaFacebookF, FaGithub, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import registerImg from "../../../assets/register.jpg";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Register = () => {
+  const { setUser, createUserWithEmail, profileUpdate } =
+    useContext(AuthContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const photo = form.photo.value;
+    const password = form.password.value;
+
+    console.log(name, email, photo, password);
+
+    createUserWithEmail(email, password)
+      .then((result) => {
+        profileUpdate(name, photo)
+          .then(() => {
+            console.log("Profile Update");
+            const newUser = result.user;
+            setUser(newUser);
+          })
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <section className="min-h-[90vh] lg:w-10/12 mx-auto">
       <div className="px-6 h-full text-gray-800">
         <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
           <div className="xl:mr-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="text-lg mb-0 mr-4">Register in with</p>
                 <button
@@ -48,6 +75,7 @@ const Register = () => {
               <div className="mb-6">
                 <input
                   type="text"
+                  name="name"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Your Name"
                 />
@@ -57,8 +85,19 @@ const Register = () => {
               <div className="mb-6">
                 <input
                   type="email"
+                  name="email"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Email address"
+                />
+              </div>
+
+              {/* <!-- Photo url input --> */}
+              <div className="mb-6">
+                <input
+                  type="text"
+                  name="photo"
+                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  placeholder="Photo URL"
                 />
               </div>
 
@@ -66,6 +105,7 @@ const Register = () => {
               <div className="mb-6">
                 <input
                   type="password"
+                  name="password"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Password"
                 />

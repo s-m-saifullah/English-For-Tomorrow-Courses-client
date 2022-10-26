@@ -8,7 +8,6 @@ import { AuthContext } from "../../contexts/AuthProvider";
 const Header = () => {
   const [isDark, setIsDark] = useState(false);
   const { user, setUser, logout } = useContext(AuthContext);
-  console.log(user);
 
   const handleLogout = () => {
     logout()
@@ -50,10 +49,12 @@ const Header = () => {
                   </Link>
                 </li>
                 <li>
-                  {" "}
-                  <button onClick={handleLogout} className="btn btn-primary ">
+                  <Link
+                    className="bg-primary rounded-lg text-white "
+                    onClick={handleLogout}
+                  >
                     Logout
-                  </button>
+                  </Link>
                 </li>
               </>
             ) : (
@@ -73,7 +74,6 @@ const Header = () => {
                 </span>
               ) : (
                 <span>
-                  {" "}
                   <FaMoon />{" "}
                 </span>
               )}
@@ -109,14 +109,47 @@ const Header = () => {
               <li>
                 <Link to="/blog">Blog</Link>
               </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link to="/register">Register</Link>
-              </li>
-              <li>
-                <Link to="/profile">Profile</Link>
+              {user?.displayName ? (
+                <>
+                  <li>
+                    <Link to="/profile">
+                      <img
+                        className="w-10 h-10 rounded-full "
+                        src={user.photoURL}
+                        alt=""
+                      />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="bg-primary rounded-lg text-white "
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+                  <li>
+                    <Link to="/register">Register</Link>
+                  </li>
+                </>
+              )}
+              <li onClick={() => setIsDark(!isDark)}>
+                {isDark ? (
+                  <span>
+                    <FaSun />
+                  </span>
+                ) : (
+                  <span>
+                    {" "}
+                    <FaMoon />{" "}
+                  </span>
+                )}
               </li>
             </ul>
           </div>

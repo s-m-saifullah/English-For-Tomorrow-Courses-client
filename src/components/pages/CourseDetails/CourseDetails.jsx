@@ -24,7 +24,6 @@ const CourseDetails = () => {
     courseDetails,
   };
 
-  console.log(courseDetails);
   return (
     <CourseContext.Provider value={dlInfo}>
       {/* Cover Image */}

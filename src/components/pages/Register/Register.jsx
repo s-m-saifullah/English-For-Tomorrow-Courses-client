@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { FaFacebookF, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import registerImg from "../../../assets/register.jpg";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
@@ -14,6 +14,8 @@ const Register = () => {
     twitterSignIn,
     githubSignIn,
   } = useContext(AuthContext);
+
+  const location = useLocation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,6 +34,7 @@ const Register = () => {
             console.log("Profile Update");
             const newUser = result.user;
             setUser(newUser);
+            navigate("/");
           })
           .catch((error) => console.log(error));
       })
@@ -43,6 +46,7 @@ const Register = () => {
       .then((result) => {
         const newUser = result.user;
         setUser(newUser);
+        navigate("/");
       })
       .catch((error) => console.log(error));
   };
@@ -51,6 +55,7 @@ const Register = () => {
       .then((result) => {
         const newUser = result.user;
         setUser(newUser);
+        navigate("/");
       })
       .catch((error) => console.log(error));
   };
@@ -59,6 +64,7 @@ const Register = () => {
       .then((result) => {
         const newUser = result.user;
         setUser(newUser);
+        navigate("/");
       })
       .catch((error) => console.log(error));
   };

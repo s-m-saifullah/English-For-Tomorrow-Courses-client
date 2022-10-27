@@ -1,5 +1,6 @@
 import React, { createContext, createRef } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import ErrorPage from "../ErrorPage";
 import CourseDetailsSidebar from "./CourseDetailsSidebar";
 import CoverPhoto from "./CoverPhoto";
 
@@ -24,7 +25,7 @@ const CourseDetails = () => {
     courseDetails,
   };
 
-  return (
+  return courseDetails ? (
     <CourseContext.Provider value={dlInfo}>
       {/* Cover Image */}
       <CoverPhoto backgroundImg={backgroundImg} name={name} />
@@ -53,6 +54,8 @@ const CourseDetails = () => {
         <CourseDetailsSidebar />
       </div>
     </CourseContext.Provider>
+  ) : (
+    <ErrorPage />
   );
 };
 

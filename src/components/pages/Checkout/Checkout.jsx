@@ -1,10 +1,12 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import ErrorPage from "../ErrorPage";
 
 const Checkout = () => {
   const courseDetails = useLoaderData();
   console.log(courseDetails);
-  return (
+
+  return courseDetails ? (
     <div className="min-h-[65vh] flex justify-center items-center">
       <div className="card w-11/12 md:w-4/12 lg:w-1/4 h-auto bg-base-100 shadow-2xl">
         <div className="card-body">
@@ -22,6 +24,8 @@ const Checkout = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <ErrorPage />
   );
 };
 

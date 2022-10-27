@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { FaTwitter, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginImg from "../../../assets/login.jpg";
@@ -23,6 +24,7 @@ const Login = () => {
       .then((result) => {
         const newUser = result.user;
         setUser(newUser);
+        toast.success("You are signed in. YAY!");
         navigate(from, { replace: true });
       })
       .catch((error) => setError(error.message));
@@ -33,6 +35,7 @@ const Login = () => {
       .then((result) => {
         const newUser = result.user;
         setUser(newUser);
+        toast.success("You are signed in. YAY!");
         navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));
@@ -42,6 +45,7 @@ const Login = () => {
       .then((result) => {
         const newUser = result.user;
         setUser(newUser);
+        toast.success("You are signed in. YAY!");
         navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));
@@ -51,6 +55,7 @@ const Login = () => {
       .then((result) => {
         const newUser = result.user;
         setUser(newUser);
+        toast.success("You are signed in. YAY!");
         navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));

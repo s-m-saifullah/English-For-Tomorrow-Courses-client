@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
+import toast from "react-hot-toast";
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import registerImg from "../../../assets/register.jpg";
@@ -59,6 +60,9 @@ const Register = () => {
             console.log("Profile Update");
             const newUser = result.user;
             setUser(newUser);
+            toast.success("You're registered. Please RELOAD the page.", {
+              duration: 5000,
+            });
             navigate("/");
           })
           .catch((error) => console.log(error));
@@ -71,6 +75,7 @@ const Register = () => {
       .then((result) => {
         const newUser = result.user;
         setUser(newUser);
+        toast.success("You are signed in. YAY!");
         navigate("/");
       })
       .catch((error) => console.log(error));
@@ -80,6 +85,7 @@ const Register = () => {
       .then((result) => {
         const newUser = result.user;
         setUser(newUser);
+        toast.success("You are signed in. YAY!");
         navigate("/");
       })
       .catch((error) => console.log(error));
@@ -89,6 +95,7 @@ const Register = () => {
       .then((result) => {
         const newUser = result.user;
         setUser(newUser);
+        toast.success("You are signed in. YAY!");
         navigate("/");
       })
       .catch((error) => console.log(error));

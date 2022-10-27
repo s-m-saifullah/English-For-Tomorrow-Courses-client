@@ -97,7 +97,7 @@ const Register = () => {
     <section className="min-h-[90vh] lg:w-10/12 mx-auto mt-10">
       <div className="px-6 h-full text-gray-800">
         <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
-          <div className="xl:mr-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
+          <div className="xl:mr-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 lg:mb-0">
             <form onSubmit={handleSubmit}>
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="text-lg mb-0 mr-4">Register in with</p>

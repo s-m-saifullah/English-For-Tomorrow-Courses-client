@@ -22,7 +22,7 @@ const Header = () => {
     <div className="bg-base-100 py-4 shadow-lg w-full">
       <div className="navbar md:w-10/12 mx-auto">
         <div className="navbar-start">
-          <Link to="/" className="w-52">
+          <Link to="/" className="w-36 md:w-44 lg:w-52">
             <img src={logo} alt="" />
           </Link>
         </div>
@@ -38,24 +38,28 @@ const Header = () => {
               <Link to="/blog">Blog</Link>
             </li>
 
-            {user?.displayName ? (
+            {user?.uid ? (
               <>
                 <li>
                   <Link
-                    className="tooltip"
+                    className="tooltip p-0 my-1 mx-4"
                     data-tip={user.displayName}
                     to="/profile"
                   >
-                    <img
-                      className="w-10 h-10 rounded-full "
-                      src={user.photoURL}
-                      alt=""
-                    />
+                    {user.photoURL ? (
+                      <img
+                        className="w-10 h-10 rounded-full"
+                        src={user.photoURL}
+                        alt={`${user.displayName} display pic`}
+                      />
+                    ) : (
+                      <>{user.displayName}</>
+                    )}
                   </Link>
                 </li>
                 <li>
                   <Link
-                    className="bg-primary rounded-lg text-white "
+                    className="bg-primary rounded-lg text-white mr-3"
                     onClick={handleLogout}
                   >
                     Logout
@@ -67,7 +71,7 @@ const Header = () => {
                 <li>
                   <Link to="/login">Login</Link>
                 </li>
-                <li>
+                <li className="mr-3">
                   <Link to="/register">Register</Link>
                 </li>
               </>
@@ -103,19 +107,23 @@ const Header = () => {
               <li>
                 <Link to="/blog">Blog</Link>
               </li>
-              {user?.displayName ? (
+              {user?.uid ? (
                 <>
                   <li>
                     <Link
                       className="tooltip"
                       data-tip={user.displayName}
-                      to="#"
+                      to="/profile"
                     >
-                      <img
-                        className="w-10 h-10 rounded-full "
-                        src={user.photoURL}
-                        alt=""
-                      />
+                      {user.photoURL ? (
+                        <img
+                          className="w-10 h-10 rounded-full "
+                          src={user.photoURL}
+                          alt=""
+                        />
+                      ) : (
+                        <>{user.displayName}</>
+                      )}
                     </Link>
                   </li>
                   <li>
@@ -141,14 +149,13 @@ const Header = () => {
           </div>
           <div onClick={() => setIsDark(!isDark)}>
             {isDark ? (
-              <span>
+              <button className="btn btn-accent cursor-pointer text-white">
                 <FaSun />
-              </span>
+              </button>
             ) : (
-              <span>
-                {" "}
-                <FaMoon />{" "}
-              </span>
+              <button className="btn btn-accent cursor-pointer text-white">
+                <FaMoon />
+              </button>
             )}
           </div>
         </div>

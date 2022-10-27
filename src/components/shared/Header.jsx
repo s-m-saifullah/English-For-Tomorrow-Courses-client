@@ -40,7 +40,11 @@ const Header = () => {
             {user?.displayName ? (
               <>
                 <li>
-                  <Link to="/profile">
+                  <Link
+                    className="tooltip"
+                    data-tip={user.displayName}
+                    to="/profile"
+                  >
                     <img
                       className="w-10 h-10 rounded-full "
                       src={user.photoURL}
@@ -112,7 +116,11 @@ const Header = () => {
               {user?.displayName ? (
                 <>
                   <li>
-                    <Link to="/profile">
+                    <Link
+                      className="tooltip"
+                      data-tip={user.displayName}
+                      to="#"
+                    >
                       <img
                         className="w-10 h-10 rounded-full "
                         src={user.photoURL}

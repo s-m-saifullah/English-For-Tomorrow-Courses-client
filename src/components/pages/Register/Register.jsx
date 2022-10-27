@@ -69,7 +69,7 @@ const Register = () => {
       .catch((error) => console.log(error));
   };
   return (
-    <section className="min-h-[90vh] lg:w-10/12 mx-auto">
+    <section className="min-h-[90vh] lg:w-10/12 mx-auto mt-10">
       <div className="px-6 h-full text-gray-800">
         <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
           <div className="xl:mr-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">

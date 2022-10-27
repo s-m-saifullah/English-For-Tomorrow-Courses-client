@@ -71,17 +71,6 @@ const Header = () => {
                 </li>
               </>
             )}
-            <li onClick={() => setIsDark(!isDark)}>
-              {isDark ? (
-                <span>
-                  <FaSun />
-                </span>
-              ) : (
-                <span>
-                  <FaMoon />{" "}
-                </span>
-              )}
-            </li>
           </ul>
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -147,19 +136,19 @@ const Header = () => {
                   </li>
                 </>
               )}
-              <li onClick={() => setIsDark(!isDark)}>
-                {isDark ? (
-                  <span>
-                    <FaSun />
-                  </span>
-                ) : (
-                  <span>
-                    {" "}
-                    <FaMoon />{" "}
-                  </span>
-                )}
-              </li>
             </ul>
+          </div>
+          <div onClick={() => setIsDark(!isDark)}>
+            {isDark ? (
+              <span>
+                <FaSun />
+              </span>
+            ) : (
+              <span>
+                {" "}
+                <FaMoon />{" "}
+              </span>
+            )}
           </div>
         </div>
       </div>

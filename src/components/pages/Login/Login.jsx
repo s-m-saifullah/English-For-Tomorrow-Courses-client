@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FaFacebookF, FaTwitter, FaGithub, FaGoogle } from "react-icons/fa";
+import { FaTwitter, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginImg from "../../../assets/login.jpg";
 import { AuthContext } from "../../../contexts/AuthProvider";

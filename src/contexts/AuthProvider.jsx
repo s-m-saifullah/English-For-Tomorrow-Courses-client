@@ -64,15 +64,14 @@ const AuthProvider = ({ children }) => {
 
   // 7. Sign out
   const logout = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        setLoading(false);
-      }
+      setUser(currentUser);
+      setLoading(false);
     });
 
     return () => {
@@ -91,6 +90,7 @@ const AuthProvider = ({ children }) => {
     twitterSignIn,
     githubSignIn,
     loading,
+    setLoading,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

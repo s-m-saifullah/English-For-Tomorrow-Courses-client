@@ -13,6 +13,7 @@ const Header = () => {
     logout()
       .then(() => {
         setUser(null);
+        setLoading(false);
       })
       .catch((error) => console.log(error));
   };

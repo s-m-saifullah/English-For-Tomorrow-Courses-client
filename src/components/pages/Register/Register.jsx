@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
-import { FaFacebookF, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
+import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import registerImg from "../../../assets/register.jpg";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
@@ -15,7 +15,7 @@ const Register = () => {
     githubSignIn,
   } = useContext(AuthContext);
 
-  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();

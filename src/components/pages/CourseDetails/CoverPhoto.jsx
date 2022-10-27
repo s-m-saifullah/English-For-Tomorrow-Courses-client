@@ -10,6 +10,12 @@ const CoverPhoto = ({ backgroundImg, name }) => {
     unit: "in",
     format: [15, 19],
   };
+
+  const optionsMobile = {
+    orientation: "portrait",
+    unit: "in",
+    format: [5, 22],
+  };
   return (
     <div
       className="hero min-h-[300px]"
@@ -21,23 +27,44 @@ const CoverPhoto = ({ backgroundImg, name }) => {
           <h1 className="mb-5 text-2xl md:text:3xl lg:text-5xl font-bold">
             {name}
           </h1>
-          <ReactToPdf
-            targetRef={ref}
-            options={options}
-            scale={1}
-            x={0.5}
-            y={0.5}
-            filename={`${name} details.pdf`}
-          >
-            {({ toPdf }) => (
-              <button
-                onClick={toPdf}
-                className="btn btn-success text-center w-full"
-              >
-                <FaDownload className="mr-2" /> Download Course Details
-              </button>
-            )}
-          </ReactToPdf>
+          <div className="hidden lg:block">
+            <ReactToPdf
+              targetRef={ref}
+              options={options}
+              scale={1}
+              x={0.5}
+              y={0.5}
+              filename={`${name} details.pdf`}
+            >
+              {({ toPdf }) => (
+                <button
+                  onClick={toPdf}
+                  className="btn btn-success text-center w-full"
+                >
+                  <FaDownload className="mr-2" /> Download Course Details
+                </button>
+              )}
+            </ReactToPdf>
+          </div>
+          <div className="lg:hidden">
+            <ReactToPdf
+              targetRef={ref}
+              options={optionsMobile}
+              scale={1}
+              x={0.5}
+              y={0.5}
+              filename={`${name} details.pdf`}
+            >
+              {({ toPdf }) => (
+                <button
+                  onClick={toPdf}
+                  className="btn btn-success text-center w-full"
+                >
+                  <FaDownload className="mr-2" /> Download Course Details
+                </button>
+              )}
+            </ReactToPdf>
+          </div>
         </div>
       </div>
     </div>

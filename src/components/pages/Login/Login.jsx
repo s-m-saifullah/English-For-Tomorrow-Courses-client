@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
+import { useState } from "react";
 import { FaTwitter, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginImg from "../../../assets/login.jpg";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Login = () => {
+  const [error, setError] = useState("");
   const { login, setUser, googleSignIn, twitterSignIn, githubSignIn } =
     useContext(AuthContext);
   const navigate = useNavigate();
@@ -17,11 +19,13 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    login(email, password).then((result) => {
-      const newUser = result.user;
-      setUser(newUser);
-      navigate(from, { replace: true });
-    });
+    login(email, password)
+      .then((result) => {
+        const newUser = result.user;
+        setUser(newUser);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => setError(error.message));
   };
 
   const handleGoogleSignIn = () => {
@@ -105,6 +109,7 @@ const Login = () => {
                   name="email"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Email address"
+                  required
                 />
               </div>
 
@@ -115,14 +120,18 @@ const Login = () => {
                   name="password"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Password"
+                  required
                 />
               </div>
 
-              <div className="flex justify-between items-center mb-6">
+              <div className="flex justify-between items-center mb-4">
                 <a href="#!" className="text-gray-800">
                   Forgot password?
                 </a>
               </div>
+
+              {/* Show Error */}
+              {error && <p className="mb-6 text-error">{error}</p>}
 
               <div className="text-center lg:text-left">
                 <button

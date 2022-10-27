@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,6 +7,7 @@ import registerImg from "../../../assets/register.jpg";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Register = () => {
+  const [error, setError] = useState("");
   const {
     setUser,
     createUserWithEmail,
@@ -25,7 +27,30 @@ const Register = () => {
     const photo = form.photo.value;
     const password = form.password.value;
 
-    console.log(name, email, photo, password);
+    // Password length validation
+
+    if (password.length < 8) {
+      setError("Password must contain at least 8 characters");
+      return;
+    }
+
+    // Password uppercase validation
+    if (!/(?=.*?[A-Z])/.test(password)) {
+      setError("Password must contain at least one capital letter");
+      return;
+    }
+
+    // Password number validation
+    if (!/(?=.*[0-9])/.test(password)) {
+      setError("Password must contain at least one number");
+      return;
+    }
+
+    // Password special character validation
+    if (!/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/.test(password)) {
+      setError("Password must contain at least one special character");
+      return;
+    }
 
     createUserWithEmail(email, password)
       .then((result) => {
@@ -117,7 +142,8 @@ const Register = () => {
                   type="text"
                   name="name"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Your Name"
+                  placeholder="Your Full Name"
+                  required
                 />
               </div>
 
@@ -128,6 +154,7 @@ const Register = () => {
                   name="email"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Email address"
+                  required
                 />
               </div>
 
@@ -148,8 +175,12 @@ const Register = () => {
                   name="password"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Password"
+                  required
                 />
               </div>
+
+              {/* Show Error */}
+              {error && <p className="mb-6 text-error">{error}</p>}
 
               <div className="text-center lg:text-left">
                 <button

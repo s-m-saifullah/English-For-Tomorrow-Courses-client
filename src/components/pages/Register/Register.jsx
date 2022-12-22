@@ -9,6 +9,7 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Register = () => {
   const [error, setError] = useState("");
+  const [userLoading, setUserLoading] = useState(false);
   const {
     setUser,
     createUserWithEmail,
@@ -20,8 +21,10 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
+    setUserLoading(true);
+
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
@@ -60,6 +63,7 @@ const Register = () => {
             console.log("Profile Update");
             const newUser = result.user;
             setUser(newUser);
+            setUserLoading(false);
             toast.success("You're registered. Please RELOAD the page.", {
               duration: 5000,
             });
@@ -105,7 +109,7 @@ const Register = () => {
       <div className="px-6 h-full text-gray-800">
         <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
           <div className="xl:mr-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 lg:mb-0">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleRegister}>
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="text-lg mb-0 mr-4">Register in with</p>
                 <button
@@ -194,6 +198,21 @@ const Register = () => {
                   type="submit"
                   className="inline-block px-7 py-3 bg-primary text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                 >
+                  {userLoading ? (
+                    <svg
+                      class="h-6 w-6 animate-spin inline mr-2"
+                      viewBox="3 3 18 18"
+                    >
+                      <path
+                        class="fill-gray-200"
+                        d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"
+                      ></path>
+                      <path
+                        class="fill-gray-800"
+                        d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z"
+                      ></path>
+                    </svg>
+                  ) : null}
                   Register
                 </button>
                 <p className="text-sm font-semibold mt-2 pt-1 mb-0">
